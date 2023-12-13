@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Chart Container View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ChartContainerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ChartContainerViewController" customModule="HealthDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="61k-Kl-UbK">
+                                <rect key="frame" x="9.9999999999999964" y="59" width="53.666666666666657" height="56.333333333333343"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwD-Eo-Asd">
+                                        <rect key="frame" x="0.0" y="0.0" width="53.666666666666664" height="14.333333333333334"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" name="Text/secondary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUO-G2-hDC">
+                                        <rect key="frame" x="0.0" y="14.333333333333327" width="53.666666666666664" height="26.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                        <color key="textColor" name="Text/primary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvN-bs-lcC">
+                                        <rect key="frame" x="0.0" y="40.666666666666671" width="53.666666666666664" height="15.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                        <color key="textColor" name="Text/secondary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7y-zM-MnG" customClass="BaseView" customModule="HealthDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="74" width="140" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bCQ-cr-1mW">
+                                        <rect key="frame" x="10" y="10" width="120" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ehQ-TD-AOf">
+                                                <rect key="frame" x="40.666666666666664" y="0.0" width="38.999999999999993" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                <color key="textColor" name="link"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="98w-tL-3HY">
+                                                <rect key="frame" x="43" y="18" width="34" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <color key="textColor" name="Text/secondary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="primary"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="IJ9-rD-UCF"/>
+                                    <constraint firstItem="bCQ-cr-1mW" firstAttribute="top" secondItem="a7y-zM-MnG" secondAttribute="top" constant="10" id="YN7-g5-veq"/>
+                                    <constraint firstAttribute="trailing" secondItem="bCQ-cr-1mW" secondAttribute="trailing" constant="10" id="dXu-Qg-NK8"/>
+                                    <constraint firstAttribute="height" constant="50" id="n1R-3w-YwB"/>
+                                    <constraint firstItem="bCQ-cr-1mW" firstAttribute="leading" secondItem="a7y-zM-MnG" secondAttribute="leading" constant="10" id="vFG-Zq-fPb"/>
+                                    <constraint firstAttribute="bottom" secondItem="bCQ-cr-1mW" secondAttribute="bottom" constant="10" id="wIs-jy-xZR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpasity">
+                                        <real key="value" value="-10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" name="separetor1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.10000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TyZ-qb-czz">
+                                <rect key="frame" x="0.0" y="124" width="393" height="694"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bCe-ph-S8H">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BarChartCell" id="ylT-6T-2O0" customClass="BarChartCell" customModule="HealthDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9RD-TQ-Ick">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="TK8-DX-HNA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="TK8-DX-HNA" firstAttribute="top" secondItem="9RD-TQ-Ick" secondAttribute="top" id="0LC-zb-JtJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="TK8-DX-HNA" secondAttribute="trailing" id="OBz-oD-ACO"/>
+                                                <constraint firstAttribute="bottom" secondItem="TK8-DX-HNA" secondAttribute="bottom" id="cXF-lt-mnQ"/>
+                                                <constraint firstItem="TK8-DX-HNA" firstAttribute="leading" secondItem="9RD-TQ-Ick" secondAttribute="leading" id="eZe-1j-YfK"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="stackView" destination="TK8-DX-HNA" id="gZE-xA-LHy"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LineChartCell" id="jr0-0o-yLR" customClass="LineChartCell" customModule="HealthDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="138" width="128" height="127.99999999999997"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hSy-be-PlD">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="127.99999999999997"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TyZ-qb-czz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="65" id="0U0-VB-179"/>
+                            <constraint firstItem="a7y-zM-MnG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="575-NA-hCy"/>
+                            <constraint firstItem="61k-Kl-UbK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="76h-Sk-HFI"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TyZ-qb-czz" secondAttribute="trailing" id="LFt-es-btJ"/>
+                            <constraint firstItem="a7y-zM-MnG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="15" id="LnE-Zh-M0f"/>
+                            <constraint firstItem="TyZ-qb-czz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QGM-AG-ZH4"/>
+                            <constraint firstItem="61k-Kl-UbK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="wBD-xD-ykF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TyZ-qb-czz" secondAttribute="bottom" id="y47-rr-Q0p"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avarageLabel" destination="PUO-G2-hDC" id="OqZ-cJ-fuT"/>
+                        <outlet property="chartSelectionView" destination="a7y-zM-MnG" id="qtx-sm-yXF"/>
+                        <outlet property="collectionView" destination="TyZ-qb-czz" id="c1S-gW-abw"/>
+                        <outlet property="durationLabel" destination="vvN-bs-lcC" id="nTS-Xx-Ljo"/>
+                        <outlet property="selectedDescrLabel" destination="98w-tL-3HY" id="6uD-gr-bea"/>
+                        <outlet property="selectedTitleLabel" destination="ehQ-TD-AOf" id="8v7-tY-tEa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Text/primary">
+            <color red="0.078000001609325409" green="0.078000001609325409" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text/secondary">
+            <color red="0.37599998712539673" green="0.45100000500679016" blue="0.49799999594688416" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="link">
+            <color red="0.38723193528166883" green="0.74676219919786102" blue="0.62657483046568008" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="primary">
+            <color red="0.88188100331844266" green="0.91772880484378982" blue="0.963632185828877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="separetor1">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.10000000149011612" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

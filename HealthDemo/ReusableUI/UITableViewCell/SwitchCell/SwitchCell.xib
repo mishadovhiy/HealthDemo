@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" id="KGk-i7-Jjw" customClass="SwitchCell" customModule="HealthDemo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUf-U6-vrE" customClass="BaseView" customModule="HealthDemo" customModuleProvider="target">
+                        <rect key="frame" x="10" y="0.0" width="300" height="44"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SG0-sa-zLE">
+                                <rect key="frame" x="10" y="0.0" width="280" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiA-0R-lxz">
+                                        <rect key="frame" x="0.0" y="13" width="231" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" name="Text/primary"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yfL-MX-U9d">
+                                        <rect key="frame" x="231" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                        <connections>
+                                            <action selector="switchChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="YKh-qc-Ksu"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" name="secondary"/>
+                        <constraints>
+                            <constraint firstItem="SG0-sa-zLE" firstAttribute="top" secondItem="PUf-U6-vrE" secondAttribute="top" id="Rlx-rk-hCP"/>
+                            <constraint firstAttribute="bottom" secondItem="SG0-sa-zLE" secondAttribute="bottom" id="UjV-0q-l9b"/>
+                            <constraint firstItem="SG0-sa-zLE" firstAttribute="leading" secondItem="PUf-U6-vrE" secondAttribute="leading" constant="10" id="a2n-os-QoR"/>
+                            <constraint firstAttribute="trailing" secondItem="SG0-sa-zLE" secondAttribute="trailing" constant="10" id="azc-yV-VYh"/>
+                            <constraint firstAttribute="height" constant="44" id="tMW-By-mYY"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="PUf-U6-vrE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ddp-nd-EBy"/>
+                    <constraint firstAttribute="trailing" secondItem="PUf-U6-vrE" secondAttribute="trailing" constant="10" id="WS9-5q-JTS"/>
+                    <constraint firstItem="PUf-U6-vrE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="i8z-2n-2lw"/>
+                    <constraint firstAttribute="bottom" secondItem="PUf-U6-vrE" secondAttribute="bottom" id="nR8-ZO-jgO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="switcher" destination="yfL-MX-U9d" id="64X-Hy-oQm"/>
+                <outlet property="titleLabel" destination="aiA-0R-lxz" id="3tP-ah-NNp"/>
+            </connections>
+            <point key="canvasLocation" x="101" y="20"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Text/primary">
+            <color red="0.95300000905990601" green="0.95300000905990601" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="secondary">
+            <color red="0.65499997138977051" green="0.67799997329711914" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>
