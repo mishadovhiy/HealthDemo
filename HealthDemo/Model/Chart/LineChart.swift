@@ -9,9 +9,9 @@ import UIKit
 
 class LineChart:Chart {
     
-    init(superView: UIView!, isPreview:Bool = false, chartData:[Double], vericalCount:Int, canAnimate:Bool, goal:Double? = nil, avarage:Double? = nil) {
+    init(superView: UIView!, isPreview:Bool = false, chartData:[Double], vericalCount:Int, canAnimate:Bool, goal:Double? = nil, avarage:Double? = nil, titledData:[Date:Double]? = nil) {
         
-        super.init(superView: superView, canAnimate: canAnimate, viewModel: .init(dataCount: vericalCount, horizontalSeparetorCount: 4, chartData: chartData), isPreview: isPreview, avarage: avarage, goal: goal)
+        super.init(superView: superView, canAnimate: canAnimate, viewModel: .init(dataCount: vericalCount, horizontalSeparetorCount: 4, chartData: chartData, titledData: titledData), isPreview: isPreview, avarage: avarage, goal: goal)
         
     }
     
@@ -24,7 +24,7 @@ class LineChart:Chart {
         var yValues:[CGPoint] = []
         for i in 0..<viewModel.dataCount {
             let value:CGFloat = viewModel.chartData.count - 1 >= i ? viewModel.chartData[i] : 0
-            let percent = viewModel.max == 0 ? 0 : (value / viewModel.max)
+            let percent = viewModel.max == 0 ? 0 : ((value) / viewModel.max)
             yValues.append(.init(x: viewWidth * (CGFloat(i) + 0.5), y: superView.frame.height - (percent * superView.frame.height)))
         }
         

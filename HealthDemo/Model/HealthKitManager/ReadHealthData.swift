@@ -112,7 +112,12 @@ class ReadHealthData {
                 }
                 return
             }
-            DataBase.db.general.dataLoaded = true
+            if !DataBase.db.general.dataLoaded {
+                DispatchQueue.main.async {
+                    DataBase.db.general.dataLoaded = true
+                }
+            }
+            
             results.enumerateStatistics(from: self.calendar.startDate, to: self.calendar.endDate) { statistics, _ in
                 resultsCompletion(statistics)
                 if statistics.startDate == self.calendar.endDate {

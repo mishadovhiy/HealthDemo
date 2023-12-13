@@ -26,9 +26,10 @@ struct DataBase {
         set {
             dbHolder = newValue.dict
             if #available(iOS 11.0, *) {
+                
                 if let core:Data = .create(from: newValue.dict) {
                     let delegate = UIApplication.shared.delegate as? AppDelegate
-                    
+
                     DispatchQueue(label: "db", qos: .userInitiated).async {
                         delegate?.coreDataManager?.update(.init(db: core))
                     }
@@ -129,7 +130,6 @@ extension DB {
         }
     }
 }
-
-fileprivate extension DataBase {
+ extension DataBase {
     static var dbHolder:[String:Any]?
 }

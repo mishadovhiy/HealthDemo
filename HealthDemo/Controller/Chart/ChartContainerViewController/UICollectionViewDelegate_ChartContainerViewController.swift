@@ -27,12 +27,12 @@ extension ChartContainerViewController: UICollectionViewDataSource, UICollection
         switch chartData?.healthKeyData?.key.chartType {
         case .bar:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BarChartCell", for: indexPath) as! BarChartCell
-            
-            cell.set(chartData: data, canAnimate: viewModel.animateChart, verticalCount: viewModel.verticalChartCount, goal: goal, avarage: avarage, selected: chartValueSelected(_:))
+            cell.set(chartData: data, canAnimate: viewModel.animateChart, verticalCount: viewModel.verticalChartCount, goal: goal, avarage: avarage, titledData: chartData?.healthData, selected: chartValueSelected(_:))
             return cell
         case .line:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LineChartCell", for: indexPath) as! LineChartCell
-            cell.set(chartData: data, canAnimate: viewModel.animateChart, verticalCount: viewModel.verticalChartCount, goal: goal, avarage: avarage, selected: chartValueSelected(_:))
+
+            cell.set(chartData: data, canAnimate: viewModel.animateChart, verticalCount: viewModel.verticalChartCount, goal: goal, avarage: avarage, titledData: chartData?.healthData ?? [:], selected: chartValueSelected(_:))
             return cell
         default:return UICollectionViewCell()
         }

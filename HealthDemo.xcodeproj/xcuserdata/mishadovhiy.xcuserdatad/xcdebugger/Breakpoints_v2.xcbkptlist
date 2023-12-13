@@ -84,5 +84,68 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3F0A264-A49A-4BD7-B3CF-6AFAFA826B89"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HealthDemo/Model/DataBase/DataBase.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "db"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "A3F0A264-A49A-4BD7-B3CF-6AFAFA826B89 - 81f7fadf7852f309"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static HealthDemo.DataBase.db.setter : HealthDemo.DB"
+                  moduleName = "HealthDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/HealthDemo/HealthDemo/Model/DataBase/DataBase.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "752">
+               </Location>
+               <Location
+                  uuid = "A3F0A264-A49A-4BD7-B3CF-6AFAFA826B89 - bc1defc7da6d7a44"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () -&gt; () in static HealthDemo.DataBase.db.setter : HealthDemo.DB"
+                  moduleName = "HealthDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/HealthDemo/HealthDemo/Model/DataBase/DataBase.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "A3F0A264-A49A-4BD7-B3CF-6AFAFA826B89 - 81f7fadf7852f336"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static HealthDemo.DataBase.db.setter : HealthDemo.DB"
+                  moduleName = "HealthDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/HealthDemo/HealthDemo/Model/DataBase/DataBase.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "460">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

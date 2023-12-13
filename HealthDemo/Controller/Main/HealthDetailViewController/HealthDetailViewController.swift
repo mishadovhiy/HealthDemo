@@ -69,12 +69,11 @@ class HealthDetailViewController: BaseVC {
     }
     
     func changeGoalPressed() {
-        
         navigationController?.pushViewController(SliderViewController.configure(data: .init(title: "New goal for \n\(viewModel.chartData?.healthKeyData?.key.message?.title ?? "")", value: Float(DataBase.db.general.goals[viewModel.key] ?? 0), changed: { newValue in
+            
             DataBase.db.general.goals.updateValue(Double(newValue), forKey: self.viewModel.key)
             self.tableView.reloadData()
             self.viewModel.reloadTable?()
-
         })), animated: true)
     }
 }

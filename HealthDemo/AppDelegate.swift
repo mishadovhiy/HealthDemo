@@ -19,8 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        print(DataBase.db)
         coreDataManager = .init(persistentContainer: persistentContainer)
+
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let db = self.coreDataManager?.fetch(.general)?.data?.toDict
+            DataBase.dbHolder = db
+        }
         health = .init(delegate: self)
         coodinator = .init()
         window?.rootViewController = UINavigationController(rootViewController: coodinator.start())
@@ -33,7 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         if !(health?.progrecing ?? false) {
             health?.read.all {
-                self.fetchComplited(self.health?.read.results ?? .init(dict: [:]))
+                DispatchQueue.main.async {
+                    self.fetchComplited(self.health?.read.results ?? .init(dict: [:]))
+                }
             }
         }
     }

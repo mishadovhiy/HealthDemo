@@ -59,10 +59,26 @@ class Chart {
     }
     
     func drawVerticalSeparetors(view:UIView? = nil, i:Int = 0) {
-        let x = view == nil ? (CGFloat(i) * (superView.frame.width / CGFloat(viewModel.dataCount))) : 0
+        let step = superView.frame.width / CGFloat(viewModel.dataCount)
+        let x = view == nil ? (CGFloat(i) * step) : 0
         let _ = (view ?? superView).layer.drawLine([
             .init(x: x, y: 0), .init(x: x, y: superView.frame.height)
         ], color: separetorColor, opacity: 1, background: .clear, name: ChartKeys.separetor.rawValue, isMultiple: true)
+        
+//        if let days = viewModel.titledData?.keys.sorted(by: { $0 >= $1}), (days.count - 1) >= i {
+//            let day = days[i].dateComponents.stringMonth
+//            print(day, " rterfcd")
+//            let label = UILabel(frame: .init(origin: .init(x: x, y: 50), size: .init(width: step + 20, height: 20)))
+//         //   let date =
+//            label.textAlignment = .center
+//            label.text = day
+//            label.textColor = K.Colors.Text.primary
+//            label.font = .systemFont(ofSize: 9, weight: .medium)
+//            (superView)?.addSubview(label)
+//        }
+        
+        
+        
     }
     
     func drawHorizontalSeparetors() {
@@ -104,12 +120,16 @@ extension Chart {
     }
     
     struct ChartViewModel {
+        
         let dataCount:Int
         let horizontalSeparetorCount:Int
         let chartData:[Double]
         var max:Double {
             return chartData.max() ?? 0
         }
+        
+        var horizontalTitles:[String]?
+        var titledData:[Date:Double]?
     }
 }
 

@@ -12,7 +12,13 @@ extension Double {
         return string()
     }
     func string(decimalsCount:Int = 2) -> String {
-        return String(format: "%.\(decimalsCount)f", self)
+        let valid = self.isFinite && !self.isNaN
+        if self.isFinite && !self.isNaN {
+            
+        } else {
+            return "0"
+        }
+        return String(format: "%.\(decimalsCount)f", (valid ? self : 0))
     }
     
 }
@@ -28,4 +34,22 @@ extension Int {
         return dict[self]
     }
     
+    var shortMonth:String? {
+        let dict = [
+            1:"Jan",2:"Feb", 3:"Mar",
+            4:"Apr", 5:"May", 6:"Jun",
+            7:"Jul", 8:"Aug", 9:"Sept",
+            10:"Oct", 11:"Nov", 12:"Dec"
+        ]
+        return dict[self]
+    }
+    
+}
+extension DateComponents {
+    var stringMonth:String {
+        return stringMonth(short: true)
+    }
+    func stringMonth(short:Bool) -> String {
+        return month?.shortMonth ?? "" + "\(year ?? 0)"
+    }
 }

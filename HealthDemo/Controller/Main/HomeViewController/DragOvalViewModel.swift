@@ -39,9 +39,11 @@ class DragOvalViewModel {
     private func updateAll() {
         ovalViews.forEach({
                 $0.animatedTransition(Styles.pressedAnimation09, type: .fade)
-            $0.data = data[$0.tag]
+            if data.count - 1 >= $0.tag {
+                $0.data = data[$0.tag]
+
+            }
         })
-        print(data, " uyhtbgrdfvcs")
     }
     
     func dragChanged(tag:Int, newTag:Int, force:Bool = false) {

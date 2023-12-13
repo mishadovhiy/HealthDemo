@@ -12,7 +12,8 @@ class ChartBaseCell:ClearCollectionCell {
     var chartModel:Chart.ChartViewModel?
     var chartSelected:((_ at:Int)->())?
     
-    func set(chartData:[Double], canAnimate:Bool, verticalCount:Int, goal:Double?, avarage:Double?, selected:@escaping(_ at:Int)->()) {
+    func set(chartData:[Double], canAnimate:Bool, verticalCount:Int, goal:Double?, avarage:Double?, titledData:[Date:Double]? = nil, selected:@escaping(_ at:Int)->()) {
+        chartModel?.titledData = titledData
         chartSelected = selected
     }
     
