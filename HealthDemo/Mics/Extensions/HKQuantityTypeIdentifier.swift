@@ -10,11 +10,10 @@ import HealthKit
 extension HKQuantityTypeIdentifier {
     var message:MessageData? {
         switch self {
-        case .activeEnergyBurned:return .init(title: "Energy burned")
-        case .stepCount:return .init(title: "Steps count")
-        case .distanceWalkingRunning: return .init(title: "Distance walking")
-        case .distanceCycling: return .init(title: "Distance Cycling")
-        case .activeEnergyBurned: return .init(title: "Energy Burned")
+        case .stepCount:return .init(title: "Steps count", imageName: "figure.walk")
+        case .distanceWalkingRunning: return .init(title: "Distance walking", imageName: "figure.run")
+        case .distanceCycling: return .init(title: "Distance Cycling", imageName: "figure.roll")
+        case .activeEnergyBurned: return .init(title: "Energy Burned", imageName: "figure.cooldown")
         default:return nil
         }
     }

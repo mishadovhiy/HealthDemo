@@ -25,7 +25,7 @@ class HomeHealthDataCell: ClearCell {
     func set(_ initialData:InitialData, chartData:[Double]) {
         let message = initialData.data.key.message
         categoryTitleLabel.text = message?.title
-        categoryImageView.setImage(message?.imageName)
+        categoryImageView.setImage(message?.imageName, system: true)
         valueLabel.text = chartData.reduce(0, +).string
         switch initialData.data.key.chartType {
         case .bar:

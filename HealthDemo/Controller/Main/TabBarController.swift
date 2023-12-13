@@ -34,7 +34,7 @@ class TabBarController: UITabBarController {
         createSelectionView()
         self.viewControllers?.forEach({
             $0.additionalSafeAreaInsets.bottom = 19
-            $0.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: $0 == selectedViewController ? 15 : 50)
+            $0.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: $0 == selectedViewController ? 150 : 150)
         })
 
     }
@@ -42,7 +42,7 @@ class TabBarController: UITabBarController {
     
     private func createBackground() {
         let whiteBack = UIView()
-        whiteBack.backgroundColor = K.Colors.containerBackground.withAlphaComponent(0.6)
+        whiteBack.backgroundColor = K.Colors.Text.primary.withAlphaComponent(0.6)
         whiteBack.layer.cornerRadius(at: .top, value: Styles.viewRadius5)
         let newView = UIView()
         newView.backgroundColor = Styles.TabBar.background
@@ -97,8 +97,8 @@ class TabBarController: UITabBarController {
             super.selectedViewController = selectedViewController
             moveSelectionView(selectedIndex)
             updateTitle() 
-            viewControllers?.forEach({
-                $0.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: $0 == selectedViewController ? 15 : 50)
+            viewControllers?.forEach({ view in
+                view.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 120)
 
             })
 
