@@ -23,11 +23,12 @@ class HomeHealthDataCell: ClearCell {
     }
     
     func set(_ initialData:InitialData, chartData:[Double]) {
-        let message = initialData.data.key.message
+        let message = (initialData.data.key?.message ?? initialData.data.category?.message)
         categoryTitleLabel.text = message?.title
         categoryImageView.setImage(message?.imageName, system: true)
         valueLabel.text = chartData.reduce(0, +).string
-        switch initialData.data.key.chartType {
+
+        switch chartType(initialData) {
         case .bar:
             chartSuperView.subviews.forEach({
                 if !($0 is UIStackView) {
@@ -41,6 +42,9 @@ class HomeHealthDataCell: ClearCell {
         }
     }
     
+    private func chartType(_ initialData:InitialData) -> ChartType {
+        return (initialData.data.key?.chartType ?? ((initialData.data.category)?.chartType ?? .default))
+    }
 
 }
 

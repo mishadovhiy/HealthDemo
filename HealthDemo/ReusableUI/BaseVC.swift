@@ -35,6 +35,12 @@ class BaseVC:UIViewController {
     }
     
    
-
+    func vibrate() {
+        if #available(iOS 13.0, *) {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        } else {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        }
+    }
 }
 

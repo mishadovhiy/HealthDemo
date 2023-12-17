@@ -49,10 +49,14 @@ struct CoreDataDBManager {
     func update(_ new:GeneralEntityStruct) {
         if let old = fetch(.general) {
             old.data = new.db
-            appDelegate.saveContext()
+            DispatchQueue.main.async {
+                self.appDelegate.saveContext()
+            }
         } else {
             let _: GeneralEntity = .create(entity: context, transaction: new)
-            appDelegate.saveContext()
+            DispatchQueue.main.async {
+                self.appDelegate.saveContext()
+            }
         }
     }
     
@@ -92,7 +96,6 @@ extension Data {
     @available(iOS 11.0, *)
     static func create(from dict:[String:Any]) -> Data? {
         if let data = try? NSKeyedArchiver.archivedData(withRootObject: dict, requiringSecureCoding: false) {
-            print(data.count, " gewsassd")
             return data
 
         } else {

@@ -17,7 +17,8 @@ class SliderViewController: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = data?.title
-        slider.value = (data?.value ?? 0) / 2500
+        let max = data?.max ?? 2500
+        slider.value = (data?.value ?? 0) / max
         valueLabel.text = Double(data?.value ?? 0).string
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(donePressed(_:)))
@@ -32,8 +33,8 @@ class SliderViewController: BaseVC {
     }
     
     @IBAction func sliderChanged(_ sender: Any) {
-       // data?.changed((sender as! UISlider).value)
-        data?.value = (sender as! UISlider).value * 2500
+        let max = data?.max ?? 0
+        data?.value = (sender as! UISlider).value * max
         valueLabel.text = Double(data?.value ?? 0).string
 
     }
@@ -41,6 +42,7 @@ class SliderViewController: BaseVC {
     struct SliderData {
         let title:String
         var value:Float
+        var max:Float = 2500
         var changed:(_ newValue:Float)->()
     }
 

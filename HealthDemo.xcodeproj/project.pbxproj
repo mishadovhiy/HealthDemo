@@ -204,6 +204,14 @@
 			path = HeaderCell;
 			sourceTree = "<group>";
 		};
+		8D43A6862B2AA18D0040B00D /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				8DF809CF2B266391007CDB60 /* TabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
 		8D8CCE5C2B2732BA008B2B6E /* HealthKitManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,7 +362,7 @@
 			children = (
 				8DF809C12B263870007CDB60 /* HomeViewController */,
 				8DF809CA2B2639CE007CDB60 /* HealthDetailViewController */,
-				8DF809CF2B266391007CDB60 /* TabBarController.swift */,
+				8D43A6862B2AA18D0040B00D /* TabBarController */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -722,7 +730,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HealthDemo/HealthDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthDemo/Info.plist;
@@ -755,7 +763,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HealthDemo/HealthDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthDemo/Info.plist;

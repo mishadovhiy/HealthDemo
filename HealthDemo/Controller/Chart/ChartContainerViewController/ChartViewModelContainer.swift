@@ -60,7 +60,6 @@ extension ChartContainerViewController {
         
         var healthKeyData:TodayAllHealthData?
         var healthData:[Date:Double] = [:]
-
         var healthValues:[Double] = []
         
         init() {

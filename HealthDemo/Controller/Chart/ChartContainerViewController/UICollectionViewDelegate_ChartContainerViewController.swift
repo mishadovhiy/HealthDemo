@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HealthKit
 
 extension ChartContainerViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -16,7 +17,14 @@ extension ChartContainerViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.tableData.count
     }
-    
+    private var chartType:ChartType {
+        let key = chartData?.healthKey ?? ""
+        let qnt = HKQuantityTypeIdentifier(rawValue: key)
+        if !HealthKitManager.keyListQntTypes.contains(qnt) {
+            return HKCategoryTypeIdentifier(rawValue: key).chartType
+        }
+        return qnt.chartType
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let data = chartData?.healthValues ?? []
 
@@ -24,7 +32,7 @@ extension ChartContainerViewController: UICollectionViewDataSource, UICollection
         let db = DataBase.db.general
         let goal = (db.showGoal[perant.viewModel.key] ?? false) ? perant.viewModel.goal : nil
         let avarage = (db.showAvarage[perant.viewModel.key] ?? false) ? perant.viewModel.avarage : nil
-        switch chartData?.healthKeyData?.key.chartType {
+        switch chartType {
         case .bar:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BarChartCell", for: indexPath) as! BarChartCell
             cell.set(chartData: data, canAnimate: viewModel.animateChart, verticalCount: viewModel.verticalChartCount, goal: goal, avarage: avarage, titledData: chartData?.healthData, selected: chartValueSelected(_:))

@@ -8,7 +8,8 @@
 import HealthKit
 
 struct TodayAllHealthData:Hashable {
-    let key:HKQuantityTypeIdentifier
+    let key:HKQuantityTypeIdentifier?
+    var category:HKCategoryTypeIdentifier? = nil
     let value:Double?
 }
 
@@ -21,7 +22,16 @@ extension ReadHealthData {
         
         func allForToday() -> [TodayAllHealthData] {
             return HealthKitManager.keyListQnt.compactMap({
-                .init(key: $0, value: today($0))
+                if let key = $0 as? HKQuantityTypeIdentifier
+                {
+                    return .init(key: key, value: todayValue(key) ?? 0)
+                    
+                } else if let category  = $0 as? HKCategoryTypeIdentifier {
+                    return .init(key: nil, category:category, value: todayValue(nil, categoryKey:category))
+
+                } else {
+                    return .init(key: nil, value: nil)
+                }
             })
         }
         
@@ -30,11 +40,11 @@ extension ReadHealthData {
             if let month = date.month,
                let year = date.year
             {
-                return allValues(.init(rawValue: key)).filter({
+                return allValues(.init(rawValue: key), categoryKey: .init(rawValue: key)).filter({
                     $0.key.dateComponents.month == month && $0.key.dateComponents.year == year
                 })
             } else if let year = date.year {
-                return allValues(.init(rawValue: key)).filter({
+                return allValues(.init(rawValue: key), categoryKey: .init(rawValue: key)).filter({
                     $0.key.dateComponents.year == year
                 })
             } else {
@@ -47,20 +57,42 @@ extension ReadHealthData {
             return Dictionary(uniqueKeysWithValues: values)
         }
         
-        func today(_ key:HKQuantityTypeIdentifier) -> Double? {
+        func todayValue(_ key:HKQuantityTypeIdentifier? = nil, categoryKey:HKCategoryTypeIdentifier? = nil) -> Double? {
             let today = Date()
             return allValues(key)[today]
         }
         
-        private func allValues(_ key:HKQuantityTypeIdentifier) -> [Date:Double] {
-            switch key {
-            case .activeEnergyBurned:return energyBurned
-            case .distanceCycling: return distance
-            case .distanceWalkingRunning: return distanceRunning
-            case .activeEnergyBurned: return energyBurned
-            case .stepCount: return steps
-            default: return [:]
+        private func allValues(_ key:HKQuantityTypeIdentifier? = nil, categoryKey:HKCategoryTypeIdentifier? = nil) -> [Date:Double] {
+
+            if let qKey = key {
+                switch qKey {
+                case .activeEnergyBurned:return energyBurned
+                case .distanceCycling: return distance
+                case .distanceWalkingRunning: return distanceRunning
+                case .activeEnergyBurned: return energyBurned
+                case .stepCount: return steps
+                default: 
+                    if let categoryKey = categoryKey {
+                        switch categoryKey {
+                        case .sleepAnalysis:
+                            return sleep
+                        default: 
+                            return [:]
+                        }
+                    } else {
+                        return [:]
+                    }
+                }
+            } else if let categoryKey = categoryKey {
+                switch categoryKey {
+                case .sleepAnalysis: 
+                    return sleep
+                default: return [:]
+                }
+            } else {
+                return [:]
             }
+            
         }
         
         var distance:[Date:Double] {
@@ -87,6 +119,26 @@ extension ReadHealthData {
                 dict.updateValue(newValue, forKey: HKQuantityTypeIdentifier.activeEnergyBurned.rawValue)
             }
         }
+        
+        var sleep:[Date:Double] {
+            get {
+                return dict[HKCategoryTypeIdentifier.sleepAnalysis.rawValue] as? [Date:Double] ?? [:]
+            }
+            set {
+                var results:[Date:Double] = [:]
+                newValue.forEach {
+                    let dateComp = $0.key.dateComponents
+                    let resultDate:DateComponents = .init(calendar:.current, year:dateComp.year, month: dateComp.month, day: dateComp.day)
+                    if let date = Calendar.current.date(from: resultDate) {
+                        let values = results[date] ?? 0
+                        results.updateValue(values + $0.value, forKey: date)
+                        
+                    }
+                }
+                dict.updateValue(results, forKey: HKCategoryTypeIdentifier.sleepAnalysis.rawValue)
+            }
+        }
+        
         var steps:[Date:Double] {
             get {
                 return dict[HKQuantityTypeIdentifier.stepCount.rawValue] as? [Date:Double] ?? [:]

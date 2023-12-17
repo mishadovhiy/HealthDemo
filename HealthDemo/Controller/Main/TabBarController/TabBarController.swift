@@ -23,7 +23,6 @@ class TabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
-
     }
     
     private func prepareUI() {
@@ -36,14 +35,42 @@ class TabBarController: UITabBarController {
             $0.additionalSafeAreaInsets.bottom = 19
             $0.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: $0 == selectedViewController ? 150 : 150)
         })
-
     }
     
     
+    
+    
+    private func moveSelectionView(_ selectedTab:Int) {
+        guard let backView = self.view.subviews.first(where: {$0.layer.name == "Background"}),
+              let selectionView = backView.subviews.first(where: {$0.layer.name == "SelectionView"}) else { return }
+        let step = self.view.frame.width / CGFloat(self.viewControllers?.count ?? 0)
+
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.7) {
+            selectionView.frame.origin = .init(x: CGFloat(step * CGFloat(selectedTab)) + 6, y: 7)
+        }
+    }
+    
+    override var selectedViewController: UIViewController? {
+        didSet {
+            super.selectedViewController = selectedViewController
+            moveSelectionView(selectedIndex)
+            updateTitle() 
+            viewControllers?.forEach({ view in
+                view.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 120)
+            })
+        }
+    }
+
+    func updateTitle() {
+        title = viewControllers?[selectedIndex].title
+    }
+    
+}
+
+
+
+fileprivate extension TabBarController {
     private func createBackground() {
-        let whiteBack = UIView()
-        whiteBack.backgroundColor = K.Colors.Text.primary.withAlphaComponent(0.6)
-        whiteBack.layer.cornerRadius(at: .top, value: Styles.viewRadius5)
         let newView = UIView()
         newView.backgroundColor = Styles.TabBar.background
         view.insertSubview(newView, at: 1)
@@ -56,18 +83,14 @@ class TabBarController: UITabBarController {
         newView.addSubview(helper)
         let safeArea = navigationController?.view.safeAreaInsets.bottom ?? 0
         let tabHeight = tabBar.frame.height + 14
-        if #available(iOS 11.0, *) {
-            newView.addConstaits([.left:5, .right:-5, .bottom:(safeArea - 2) * -1, .height:tabHeight], superV: view)
-            helper.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: newView)
-            
+        newView.addConstaits([.centerX:0, .width:view.frame.width / 1.5, .bottom:(safeArea - 2) * -1, .height:tabHeight], superV: view)
+        helper.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: newView)
+        newView.layer.move(.top, value: (safeArea + tabHeight))
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1) {
+            newView.layer.move(.top, value: 0)
         }
-        let backFrame:CGRect = .init(origin: .zero, size: .init(width: self.view.frame.width, height: safeArea + tabHeight))
-        helper.layer.createGradient(.darkGreen, frame: backFrame)
-        self.view.insertSubview(whiteBack, at: 1)
-
-        whiteBack.addConstaits([.left:0, .right:0, .bottom:0, .height:54 + safeArea], superV: self.view)
-        let _ = whiteBack.addBluer(frame: backFrame)
     }
+
     private func createSelectionView() {
         guard let toView = self.view.subviews.first(where: {$0.layer.name == "Background"}) else { return }
         let width:CGFloat = 50
@@ -78,38 +101,7 @@ class TabBarController: UITabBarController {
         view.layer.shadow(opasity: Styles.shadow1)
         toView.addSubview(view)
         moveSelectionView(0)
-
     }
-    
-    private func moveSelectionView(_ selectedTab:Int) {
-        guard let backView = self.view.subviews.first(where: {$0.layer.name == "Background"}),
-              let selectionView = backView.subviews.first(where: {$0.layer.name == "SelectionView"}) else { return }
-        let step = self.view.frame.width / CGFloat(self.viewControllers?.count ?? 0)
-
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.7) {
-            selectionView.frame.origin = .init(x: CGFloat(step * CGFloat(selectedTab)) + (CGFloat.random(in: (50 + 2)..<(50 + 14))), y: 7)
-
-        }
-    }
-    
-    override var selectedViewController: UIViewController? {
-        didSet {
-            super.selectedViewController = selectedViewController
-            moveSelectionView(selectedIndex)
-            updateTitle() 
-            viewControllers?.forEach({ view in
-                view.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 120)
-
-            })
-
-
-        }
-    }
-
-    func updateTitle() {
-        title = viewControllers?[selectedIndex].title
-    }
-    
 }
 
 

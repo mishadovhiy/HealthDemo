@@ -53,9 +53,6 @@ class ChartContainerViewController: UIViewController {
             new?.healthValues.append($0.value)
         })
         let avarage = sum / Double(valueCount)
-        print(sum, " grbef")
-        print(valueCount, " valueCountvalueCount")
-
 
         let superVC = parent as! HealthDetailViewController
         superVC.viewModel.avarage = avarage
@@ -134,7 +131,7 @@ extension ChartContainerViewController {
 
 extension ChartContainerViewController:ScrollModelProtocol {
     func selectedRowChanged(new row: Int) {
-        print(row, " jutyhrgef")
+        print(row, " ChartContainerViewController_selectedRowChanged")
     }
 }
 

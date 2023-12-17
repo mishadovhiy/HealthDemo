@@ -39,6 +39,10 @@ struct K {
             static let red = UIColor(named: "Colored/red")!
             static let green = UIColor(named: "Colored/green")!
             static let blue = UIColor(named: "Colored/blue")!
+            static let blue2 = UIColor(named: "Colored/blue2")!
+            static let green1 = UIColor(named: "Colored/green1")!
+            static let orange = UIColor(named: "Colored/orange")!
+            static let pink = UIColor(named: "Colored/pink")!
 
         }
     }

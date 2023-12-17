@@ -18,13 +18,11 @@ extension Date {
         neededComponents.forEach({
             switch $0 {
             case .day:
-                str.append("\(date.day ?? 0)")
+                str.append(date.day?.twoDecimals ?? "")
             case .month:
-                str.append("\(date.month ?? 0)")
+                str.append(date.stringMonth)
             case .year:
                 str.append("\(date.year ?? 0)")
-            default:
-                break
             }
             if $0 != neededComponents.last {
                 str.append(", ")

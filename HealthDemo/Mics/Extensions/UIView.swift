@@ -84,7 +84,6 @@ extension UIView {
 
 extension UIView {
     func addOvalProgress(percent:CGFloat, width:CGFloat? = nil, color:UIColor? = nil, canDivide:Bool = true, isSmall:Bool = false) {
-        print(percent, " grvfecdsx")
         addShape(percent: 1, main: false, canDivide: canDivide, color: color, width: width, isSmall: isSmall)
         addShape(percent: percent, canDivide: canDivide, color: color, width: width, isSmall: isSmall)
     }
@@ -100,7 +99,7 @@ extension UIView {
             shape.backgroundColor = UIColor.clear.cgColor
             shape.lineWidth = width ?? 2
             shape.fillColor = UIColor.clear.cgColor
-            shape.strokeColor = main ? (color ?? K.Colors.link).cgColor : K.Colors.primaryBackground.withAlphaComponent(0.1).cgColor
+            shape.strokeColor = main ? (color ?? K.Colors.link).cgColor : K.Colors.link.withAlphaComponent(0.1).cgColor
             if main {
                 shape.strokeEnd = main ? (canDivide ? ((percent / 2) + 0.5) : percent) : 1
 

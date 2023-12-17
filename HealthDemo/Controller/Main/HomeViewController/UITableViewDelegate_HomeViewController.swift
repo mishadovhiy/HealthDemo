@@ -19,9 +19,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //to detail
         self.coodinator?.push(HealthDetailViewController.configure(chart: .with({
-            $0.healthKey = tableData[indexPath.row].key.rawValue
+            $0.healthKey = tableData[indexPath.row].key?.rawValue ?? (tableData[indexPath.row].category?.rawValue ?? "")
         })))
     }
     

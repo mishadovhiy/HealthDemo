@@ -20,7 +20,7 @@ class HealthDetailViewController: BaseVC {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
         viewModel = .init(key: healthKey ?? "")
-        title = HKQuantityTypeIdentifier.init(rawValue: healthKey ?? "").message?.title
+        title = (HKQuantityTypeIdentifier.init(rawValue: healthKey ?? "").message ?? HKCategoryTypeIdentifier.init(rawValue: healthKey ?? "").message)?.title
         let date = Calendar.current.date(byAdding: .month, value: 2, to: Date())
         chartDateComponent = (date ?? Date()).dateComponents
         tableView.registerCell([.switcher, .header])
@@ -69,7 +69,14 @@ class HealthDetailViewController: BaseVC {
     }
     
     func changeGoalPressed() {
-        navigationController?.pushViewController(SliderViewController.configure(data: .init(title: "New goal for \n\(viewModel.chartData?.healthKeyData?.key.message?.title ?? "")", value: Float(DataBase.db.general.goals[viewModel.key] ?? 0), changed: { newValue in
+        let key = viewModel.chartData?.healthKeyData?.key?.message?.title ?? (viewModel.chartData?.healthKeyData?.category?.message?.title ?? "")
+        
+        let keyType = HKQuantityTypeIdentifier(rawValue: viewModel.chartData?.healthKey ?? "")
+        var maximum = keyType.goalMultiplier
+        if !HealthKitManager.keyListQntTypes.contains(keyType) {
+            maximum = HKCategoryTypeIdentifier(rawValue: keyType.rawValue).goalMultiplier
+        }
+        navigationController?.pushViewController(SliderViewController.configure(data: .init(title: "New goal for \n\( key)", value: Float(DataBase.db.general.goals[viewModel.key] ?? 0), max:Float(maximum), changed: { newValue in
             
             DataBase.db.general.goals.updateValue(Double(newValue), forKey: self.viewModel.key)
             self.tableView.reloadData()

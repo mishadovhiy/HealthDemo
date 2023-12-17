@@ -30,10 +30,9 @@ class ViewModelHealthDetail {
         let health = appDelegate?.health
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let strKey = self.chartData?.healthKey
-            let key = health?.read.results.allForToday().first(where: {$0.key.rawValue == self.chartData?.healthKey ?? ""})
+            let key = health?.read.results.allForToday().first(where: {$0.key?.rawValue == self.chartData?.healthKey ?? ""})
             self.chartData?.healthKeyData = key
             self.chartData?.healthData = appDelegate?.health?.read.results.allValues(strKey, date: dateComponent ?? .init()) ?? [:]
-            print(self.chartData?.healthData, " thrtegfe")
             DispatchQueue.main.async {
                 completion()
             }

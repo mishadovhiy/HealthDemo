@@ -10,4 +10,8 @@ import Foundation
 enum ChartType {
     case bar
     case line
+    
+    static var `default`:ChartType {
+        return .line
+    }
 }

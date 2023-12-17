@@ -93,10 +93,10 @@ extension CALayer {
     }
     
     
-    func shadow(opasity:Float = Styles.shadow, color:UIColor? = nil, radius:CGFloat? = nil) {
+    func shadow(opasity:Float = Styles.shadow, color:UIColor? = nil, radius:CGFloat? = nil, offset:CGSize = .zero) {
         let col = K.Colors.shadow
         self.shadowColor = (color ?? col).cgColor
-        self.shadowOffset = .zero
+        self.shadowOffset = offset
         self.shadowRadius = radius ?? 10
         self.shadowOpacity = opasity
     }
@@ -457,8 +457,8 @@ extension CALayer {
                 
             case .darkGreen:
                 return [
-                    K.Colors.primaryBackground.withAlphaComponent(0.05).cgColor,
-                    K.Colors.primaryBackground.lighter().withAlphaComponent(0.05).cgColor
+                    K.Colors.primaryBackground.withAlphaComponent(1).cgColor,
+                    K.Colors.link.withAlphaComponent(1).cgColor
                 ]
             case .darkRed:
                 return [

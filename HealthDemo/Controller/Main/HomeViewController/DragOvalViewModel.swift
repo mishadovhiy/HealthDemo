@@ -10,7 +10,18 @@ import UIKit
 
 struct OvalFavoriteData {
     let percent:Int
-    let key:HKQuantityTypeIdentifier
+    let key:HKQuantityTypeIdentifier?
+    var category:HKCategoryTypeIdentifier? = nil
+    
+    var keyResult:(HKQuantityTypeIdentifier?, HKCategoryTypeIdentifier?) {
+        if let cat = key?.rawValue ?? category?.rawValue {
+            return (key, .init(rawValue: cat))
+            
+        } else {
+            return (key, .init(rawValue: (key?.rawValue ?? category?.rawValue) ?? ""))
+            
+        }
+    }
 }
 
 class DragOvalViewModel {
@@ -24,52 +35,43 @@ class DragOvalViewModel {
     private var frames:[Int:CGRect] = [:]
     
     var data:[OvalFavoriteData]!
+    var reordered:(()->())?
     
     init(ovalsStack: UIStackView, ovalViews: [OvalView], data:[OvalFavoriteData], view:UIView) {
         self.ovalsStack = ovalsStack
         self.ovalViews = ovalViews
         self.view = view
         self.data = data
-
         setupUI()
-
         updateAll()
     }
     
-    private func updateAll() {
+    func updateAll() {
         ovalViews.forEach({
-                $0.animatedTransition(Styles.pressedAnimation09, type: .fade)
+            $0.animatedTransition(Styles.pressedAnimation09, type: .fade)
             if data.count - 1 >= $0.tag {
                 $0.data = data[$0.tag]
-
             }
         })
     }
     
     func dragChanged(tag:Int, newTag:Int, force:Bool = false) {
         if tag != newTag {
-            print("Tagchanged from: ", tag, " newTag: ", newTag)
             copiedView?.tag = newTag
             let color = data[tag]
             data.remove(at: tag)
             data.insert(color, at: newTag)
             ovalViews.forEach({
-              //  let animated = $0.backgroundColor != data[$0.tag]
-                //if animated {
-                    $0.animatedTransition(Styles.pressedAnimation09, type: .fade)
-                //}
+                $0.animatedTransition(Styles.pressedAnimation09, type: .fade)
                 $0.data = data[$0.tag]
-                print(data[$0.tag], " yuthgrytvefrgt")
-              //  $0.backgroundColor = data[$0.tag]
                 $0.alpha = newTag == $0.tag ? (force ? 1 : 0) : 1
             })
-            DataBase.db.general.favoritesOrder = data.compactMap({$0.key.rawValue})
-            
+            DataBase.db.general.favoritesOrder = data.compactMap({$0.key?.rawValue ?? ($0.category?.rawValue ?? "")})
+            reordered?()
         }
     }
-    
-    
 }
+
 
 fileprivate extension DragOvalViewModel {
     func setupUI() {
@@ -77,7 +79,6 @@ fileprivate extension DragOvalViewModel {
         ovalViews.forEach({
             let frame = $0.convert($0.bounds, to: ovalsStack)
             frames.updateValue(frame, forKey: $0.tag)
-            print(frame, " rtegrf")
         })
     }
     
@@ -91,7 +92,6 @@ fileprivate extension DragOvalViewModel {
     private func checkContains(_ frame:CGRect) {
         frames.forEach({
             if $0.value.contains(.init(origin: frame.origin, size: .init(width: 5, height: 5))) {
-                print("sfgda ", $0.key)
                 dragChanged(tag: copiedView?.tag ?? -1, newTag: $0.key)
             }
         })
@@ -105,15 +105,14 @@ fileprivate extension DragOvalViewModel {
             let smallViewOrigin:CGPoint = .init(x: view.superview!.frame.minX + ovalsStack.arrangedSubviews.first!.frame.minX, y: view.frame.minY)
             let subStack = ovalsStack.arrangedSubviews.first(where: {$0 is UIStackView}) as! UIStackView
             let size = subStack.arrangedSubviews.last!.frame.size
-            //view.frame.size
             let bigViewOrigin:CGPoint = .init(x: view.frame.width / 2, y: view.frame.height / 2)
             let frame:CGRect = .init(origin: view.tag == 0 ? bigViewOrigin : smallViewOrigin, size: size)
             ovalInitialFrame = frame
-            print(ovalInitialFrame, " rtefdwefrtrg")
             copiedView = sender.view?.copy(toView: ovalsStack, frame:  frame)
+            (copiedView as! OvalView).isCopy = true
+            (copiedView as! OvalView).data = (sender.view as! OvalView).data
             copiedView?.backgroundColor = sender.view?.backgroundColor
             copiedView?.layer.shadow()
-         //   copiedView?.subviews.forEach({$0.removeFromSuperview()})
             copiedView?.layer.masksToBounds = false
             sender.view?.alpha = 0
         case .changed:
@@ -122,7 +121,6 @@ fileprivate extension DragOvalViewModel {
             
             let newFrame = CGRect(x: newOriginX, y: newOriginY, width: ovalInitialFrame.width, height: ovalInitialFrame.height)
             let frameInSuper = copiedView!.convert(copiedView!.bounds, to: ovalsStack)
-            print(frameInSuper, " rtegfwd")
             checkContains(frameInSuper)
             copiedView?.frame = newFrame
         case .ended, .cancelled:

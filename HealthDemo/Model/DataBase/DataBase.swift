@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 struct DataBase {
     
     static var db:DB {
@@ -21,16 +20,18 @@ struct DataBase {
                 dbHolder = db
                 return .init(dict: db ?? [:])
             }
-            
         }
         set {
             dbHolder = newValue.dict
             if #available(iOS 11.0, *) {
-                
                 if let core:Data = .create(from: newValue.dict) {
                     let delegate = UIApplication.shared.delegate as? AppDelegate
-
-                    DispatchQueue(label: "db", qos: .userInitiated).async {
+                    
+                    if Thread.isMainThread {
+                        DispatchQueue(label: "db", qos: .userInitiated).async {
+                            delegate?.coreDataManager?.update(.init(db: core))
+                        }
+                    } else {
                         delegate?.coreDataManager?.update(.init(db: core))
                     }
                 }
@@ -57,10 +58,10 @@ struct DB {
     
     var general:DB.General {
         get {
-            return .init(dict: dict["General"] as? [String:Any] ?? [:])
+            return .init(dict: dict["Generall"] as? [String:Any] ?? [:])
         }
         set {
-            dict.updateValue(newValue.dict, forKey: "General")
+            dict.updateValue(newValue.dict, forKey: "Generall")
         }
     }
     
@@ -122,10 +123,10 @@ extension DB {
         
         var favoritesOrder:[String] {
             get {
-                return dict["favoritesOrder"] as? [String] ?? HealthKitManager.keyListQnt.compactMap({$0.rawValue})
+                return dict["favoritesOrderrr"] as? [String] ?? (HealthKitManager.keyListSampleTypes.compactMap({$0.rawValue}) + HealthKitManager.keyListQntTypes.compactMap({$0.rawValue}))
             }
             set {
-                dict.updateValue(newValue, forKey: "favoritesOrder")
+                dict.updateValue(newValue, forKey: "favoritesOrderrr")
             }
         }
     }

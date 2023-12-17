@@ -44,12 +44,20 @@ extension Int {
         return dict[self]
     }
     
+    var twoDecimals:String {
+        if self <= 9 {
+            return "0\(self)"
+        } else {
+            return "\(self)"
+        }
+    }
+    
 }
 extension DateComponents {
     var stringMonth:String {
         return stringMonth(short: true)
     }
     func stringMonth(short:Bool) -> String {
-        return month?.shortMonth ?? "" + "\(year ?? 0)"
+        return month?.shortMonth ?? "" + (short ? "" : " \(year ?? 0)")
     }
 }

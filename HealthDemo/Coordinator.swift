@@ -9,6 +9,7 @@ import UIKit
 
 struct Coordinator {
     
+    var appBecomeActive = false
     private var appDelegate:AppDelegate? {
         return UIApplication.shared.delegate as? AppDelegate
     }
@@ -19,15 +20,12 @@ struct Coordinator {
     
     func start() -> UIViewController {
         if DataBase.db.general.dataLoaded {
-            print("grandeddfeds")
             return TabBarController.configure()
         } else {
-            print("notgrandeddfeds")
             let vc = MessageViewController.configure()
             vc.messageType = .health
             return vc
         }
-      //  return TabBarController.configure()
     }
     
     func push(_ viewController:UIViewController) {

@@ -25,7 +25,6 @@ class ChartBaseCell:ClearCollectionCell {
         }
         let step = contentView.frame.width / CGFloat(chartModel?.dataCount ?? 0)
         let i = touch.x / step
-        print(i, " hfgd")
         chartSelected?(Int(i))
 
     }

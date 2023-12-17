@@ -41,20 +41,40 @@ class HealthKitManager:ModelLifeCycle {
         })
     }
     
-    static let keyListQnt:[HKQuantityTypeIdentifier] = [.stepCount, .distanceWalkingRunning, .distanceCycling, .activeEnergyBurned]
+    static var keyListQnt:[Any] {
+        return keyListQntTypes + keyListSampleTypes
+    }
     
-    func checkAuthorizationGranded(key:HKQuantityTypeIdentifier? = nil) -> Bool {
+    static let keyListQntTypes:[HKQuantityTypeIdentifier] = [
+        HKQuantityTypeIdentifier.stepCount,
+        HKQuantityTypeIdentifier.distanceWalkingRunning,
+        HKQuantityTypeIdentifier.activeEnergyBurned,
+        HKQuantityTypeIdentifier.distanceCycling
+    ]
+    
+    static let keyListSampleTypes:[HKCategoryTypeIdentifier] = [ HKCategoryTypeIdentifier.sleepAnalysis]
+    
+    func checkAuthorizationGranded(key:HKQuantityTypeIdentifier? = nil, category:HKCategoryTypeIdentifier? = nil) -> Bool {
         var has = false
-        if let key = key {
-            if self.healthStore.authorizationStatus(for: HKQuantityType.quantityType(forIdentifier: key)!) == .sharingAuthorized {
+        let resultKey = key?.rawValue ?? category?.rawValue
+        if let resultKey = resultKey {
+            if self.healthStore.authorizationStatus(for: HKQuantityType.quantityType(forIdentifier: .init(rawValue: resultKey)) ?? (HKQuantityType.categoryType(forIdentifier: .init(rawValue: resultKey))!)) == .sharingAuthorized {
                 has = true
             }
             
         } else {
                 HealthKitManager.keyListQnt.forEach {
-                    if self.healthStore.authorizationStatus(for: HKQuantityType.quantityType(forIdentifier: $0)!) == .sharingAuthorized {
+                    if let category = $0 as? HKCategoryTypeIdentifier,
+                       #available(iOS 15.0, *),
+                       self.healthStore.authorizationStatus(for: HKCategoryType(category)) == .sharingAuthorized
+                    {
+                        has = true
+                    } else if let key = $0 as? HKQuantityTypeIdentifier,
+                              self.healthStore.authorizationStatus(for: HKQuantityType.quantityType(forIdentifier: key) ?? (HKQuantityType.categoryType(forIdentifier: category!)!)) == .sharingAuthorized
+                    {
                         has = true
                     }
+
                 }
         }
         
@@ -73,14 +93,14 @@ class HealthKitManager:ModelLifeCycle {
             ])
             let single:Set<HKSampleType> = key == nil ? [] : [HKQuantityType.quantityType(forIdentifier: .init(rawValue: key!))!]
             healthStore.requestAuthorization(toShare: [], read: key != nil ? single : infoToRead) { granded, error in
-                print(error, " htgrfdc")
+                print(error, " health error")
                 if granded {
                     self.readAll()
                 } 
                
             }
         } else {
-            print("health not availible")
+            print("health not availible error")
         }
     }
     
